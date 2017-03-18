@@ -1,0 +1,14 @@
+# Created by .ignore support plugin (hsz.mobi)
+/.idea/
+/web-app/web/bundles/
+/web-app/app/bootstrap.php.cache
+/web-app/app/cache/*
+/web-app/app/config/parameters.yml
+/web-app/app/logs/*
+!/web-app/app/cache/.gitkeep
+!/web-app/app/logs/.gitkeep
+/web-app/app/phpunit.xml
+/web-app/vendor/
+/web-app/bin/
+/web-app/web/bower/
+/web-app/app/cache/

@@ -1,0 +1,23 @@
+{
+  "name": "lumino",
+  "authors": [
+    "Nipuna Sudharaka <nipuna.14@cse.mrt.ac.lk>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "web/bower",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "chartist": "^0.10.1"
+  }
+}

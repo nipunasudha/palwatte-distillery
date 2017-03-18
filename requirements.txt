@@ -1,0 +1,11 @@
+numpy
+pyocr
+pillow
+tesseract
+pytesseract
+flask
+requests
+tornado
+flask_cors
+configparser
+opencv-python
