@@ -9,3 +9,6 @@ tornado
 flask_cors
 configparser
 opencv-python
+waitress
+falcon
+falcon-cors

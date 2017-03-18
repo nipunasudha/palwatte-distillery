@@ -3,8 +3,6 @@ import configparser
 
 # configparser
 # https://wiki.python.org/moin/ConfigParserExamples
-# https://docs.python.org/3/library/configparser.html
-
 
 def read_settings(filepath="config.ini"):
     config = configparser.ConfigParser()

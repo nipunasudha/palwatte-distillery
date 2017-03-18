@@ -26,7 +26,7 @@ def resultp():
     return json.dumps(["Recieved!"])
 
 
-if __name__ == "__main__":
+def run_server():
     http_server = HTTPServer(WSGIContainer(app))
     http_server.listen(5000)
     IOLoop.instance().start()
