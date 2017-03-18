@@ -10,4 +10,3 @@ path[3] = os.path.join(os.path.dirname(__file__), 'paldi-packages', 'Utilities')
 for p in path:
     if p not in sys.path:
         sys.path.insert(1, p)
-del path

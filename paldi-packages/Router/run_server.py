@@ -4,11 +4,10 @@ import json
 from falcon_cors import CORS
 
 cors = CORS(allow_all_origins=True)
-
-
+print("Initialized.")
 class QuoteResource:
     def on_post(self, req, resp):
-        """Handles GET requests"""
+        """Handles POST requests"""
         quote = {
             'quote': 'I\'ve always been more interested in the future than in the past.',
             'author': 'Grace Hopper'
@@ -20,4 +19,4 @@ class QuoteResource:
 api = falcon.API(middleware=[cors.middleware])
 api.add_route('/post', QuoteResource())
 serve(api, host='127.0.0.1', port=5000)
-print("I can do other stuff too")
+print("Server stopped.")

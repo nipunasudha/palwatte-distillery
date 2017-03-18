@@ -13,7 +13,7 @@ def release_camera(cap):
     cap.release()
 
 
-def read_camera(cap, path="D:\\lumino\\web\\img\\photoFromCam.jpg"):
+def read_camera(cap, path="D:\\palwatte-distillery\\fake.jpg"):
     # def read_camera(cap, path="/media/nipuna/APPS & GAMES/lumino/web/img/photoFromCam.jpg"):
     ret, frame = cap.read()
     # frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
