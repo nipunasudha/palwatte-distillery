@@ -1,16 +1,33 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}
     {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/monitor.css') }}">
 {% endblock %}
 
 {% block body %}
+    <script>
+        var outputPath = "{{ asset('img/photoFromCam.jpg') }}"
+    </script>
     <div id="wrapper">
         <div id="container">
             <div id="welcome">
-                <h1><span>Welcome to</span> Palwatte Distillery </h1>
+                <h2>Live Feed Monitor </h2>
             </div>
-            <p id="count">Initializing live stream...</p>
-            <img id="photo" src="#" alt="-">
+            <div class="row">
+                <div class="col-md-7"><img id="photo" src="#" alt="-"></div>
+                <div class="col-md-5">
+                    <p id="count">Initializing live stream...</p>
+                    <button onclick="autoFetch()" class="btn-primary">Auto</button>
+                    <button onclick="manualFetch()" class="btn-primary">Manual Fetch</button>
+                    <hr>
+                    <h4>System information</h4>
+                    <p>
+                        OS : Microsoft® Windows <br>
+                        Memory : 3.6/7.9GB <br>
+                        Video Frame Size : 640 x 480
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 

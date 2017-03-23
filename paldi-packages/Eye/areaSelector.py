@@ -66,25 +66,25 @@ def render_overlays():
                       tuple(map(operator.add, refPts[(index * 2) + 1], (1, 1))), (0, 0, 0), 1, lineType=8)
         cv2.putText(local_clone, 'A ' + str(index + 1), tuple(map(operator.add, refPts[(index * 2)], (0, -3))), font,
                     0.5, (255, 0, 0), 1, cv2.LINE_AA)
-    cv2.imshow("© 2017 Syntac Inc. Palwatte Distillery Monitor", local_clone)
+    cv2.imshow("Copyright (C) 2017 Syntac Inc. Palwatte Distillery Monitor", local_clone)
 
 
 def click_handler(event, x, y, flags, pram):
     global refPts, image, numSelected, onDrag
 
-    if (event == cv2.EVENT_LBUTTONDOWN):
+    if event == cv2.EVENT_LBUTTONDOWN:
         onDrag = 1
         render_overlays()
-        if (len(refPts) == 0):
+        if len(refPts) == 0:
             refPts = [(x, y)]
         else:
             refPts.append((x, y))
-    elif (event == cv2.EVENT_LBUTTONUP):
+    elif event == cv2.EVENT_LBUTTONUP:
         onDrag = 0
         refPts.append((x, y))
         correct_coordinates()
         render_overlays()
-        numSelected = numSelected + 1
+        numSelected += 1
 
 
 def getSelectionsFromImage(img):
@@ -94,11 +94,11 @@ def getSelectionsFromImage(img):
     refPts = []  # Reinit refPts
     clone = image.copy()
     render_instructions(clone)
-    cv2.namedWindow("© 2017 Syntac Inc. Palwatte Distillery Monitor", flags=cv2.WINDOW_AUTOSIZE)
-    cv2.setMouseCallback("© 2017 Syntac Inc. Palwatte Distillery Monitor", click_handler)
-    cv2.imshow("© 2017 Syntac Inc. Palwatte Distillery Monitor", clone)
+    cv2.namedWindow("Copyright (C) 2017 Syntac Inc. Palwatte Distillery Monitor", flags=cv2.WINDOW_AUTOSIZE)
+    cv2.setMouseCallback("Copyright (C) 2017 Syntac Inc. Palwatte Distillery Monitor", click_handler)
+    cv2.imshow("Copyright (C) 2017 Syntac Inc. Palwatte Distillery Monitor", clone)
     while keepRunning:
-        # cv2.imshow("© 2017 Syntac Inc. Palwatte Distillery Monitor", image)
+        # cv2.imshow("Copyright (C) 2017 Syntac Inc. Palwatte Distillery Monitor", image)
         key = cv2.waitKey(1) & 0xFF
         if (key == ord("d")):
             break

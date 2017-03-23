@@ -63,23 +63,31 @@
 <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 
     <ul class="nav menu">
-        <li class="active"><a href="{{ path('dashboard') }}">
+        <li class=" {% if app.request.attributes.get('_route')=="dashboard" %}
+                            active
+                {% endif %}"><a href="{{ path('dashboard') }}">
                 <svg class="glyph stroked line-graph">
                     <use xlink:href="#stroked-line-graph"></use>
                 </svg>
                 Dashboard</a></li>
-        <li><a href="{{ url('monitor') }}">
+        <li class=" {% if app.request.attributes.get('_route')=="monitor" %}
+                            active
+                {% endif %}"><a href="{{ url('monitor') }}">
                 <svg class="glyph stroked camera ">
                     <use xlink:href="#stroked-camera"/>
                 </svg>
 
                 Monitor</a></li>
-        <li><a href="{{ path('logs') }}">
+        <li class=" {% if app.request.attributes.get('_route')=="logs" %}
+                            active
+                {% endif %}"><a href="{{ path('logs') }}">
                 <svg class="glyph stroked notepad ">
                     <use xlink:href="#stroked-notepad"/>
                 </svg>
                 Logs</a></li>
-        <li><a href="{{ path('settings') }}">
+        <li class=" {% if app.request.attributes.get('_route')=="settings" %}
+                            active
+                {% endif %}"><a href="{{ path('settings') }}">
                 <svg class="glyph stroked gear">
                     <use xlink:href="#stroked-gear"></use>
                 </svg>

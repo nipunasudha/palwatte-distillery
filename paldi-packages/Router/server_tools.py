@@ -19,5 +19,5 @@ def commander(cmd, data):
     elif cmd == "PRINT":
         print("Ok, printed")
     elif cmd == "CROP":
-        img = cv2.imread("/media/nipuna/APPS & GAMES/python-web-integration/rec.png")
+        img = cv2.imread("rec.png")
         print(AS.getSelectionsFromImage(img))
