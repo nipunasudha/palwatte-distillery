@@ -6,7 +6,7 @@ import areaSelector as AS
 from tornado.ioloop import IOLoop
 
 
-def parse_command(request):
+def parse_command(request,cam):
     cmd = request.form['cmd']
     data = request.form.getlist('data[]')
     commander(cmd, data)

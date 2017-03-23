@@ -16,8 +16,15 @@ function fetchData() {
 
 }
 
-function reloadIframe() {
-    // hackishly force iframe to reload
-    var iframe = document.getElementById("photo-iframe");
-    iframe.src = iframe.src;
+function startCamera() {
+    k = $.get('http://localhost:5000/startcam')
+    $('#btn-startcam').prop("disabled", true);
+    $('#btn-stopcam').prop("disabled", true);
+    location.reload()
+}
+function stopCamera() {
+    k = $.get('http://localhost:5000/stopcam')
+    $('#btn-stopcam').prop("disabled", true);
+    $('#btn-startcam').prop("disabled", true);
+    location.reload()
 }

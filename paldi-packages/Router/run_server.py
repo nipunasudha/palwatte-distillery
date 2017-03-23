@@ -12,6 +12,7 @@ import pprint
 import json
 import server_tools as st
 
+cam = 1
 cwd = os.getcwd()
 requestCount = 0
 app = Flask(__name__)
@@ -30,13 +31,14 @@ def resultp():
          'path': os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'fake.png')})
 
 
-@app.route('/fun')
+@app.route('/camera-stream')
 def index():
     return render_template('index.html')
 
 
 def gen(camera):
     while True:
+
         frame = camera.get_frame()
         if frame != "error":
             yield (b'--frame\r\n'
@@ -45,8 +47,49 @@ def gen(camera):
 
 @app.route('/video_feed')
 def video_feed():
-    return Response(gen(VideoCamera()),
-                    mimetype='multipart/x-mixed-replace; boundary=frame')
+    global cam
+    try:
+        cam
+    except NameError:
+        print('Camera is not started yet')
+        return Response("No camera!",
+                        mimetype='multipart/x-mixed-replace; boundary=frame')
+    else:
+        if cam == 1:
+            return Response("No camera!",
+                            mimetype='multipart/x-mixed-replace; boundary=frame')
+        else:
+            return Response(gen(cam),
+                            mimetype='multipart/x-mixed-replace; boundary=frame')
+
+
+@app.route('/startcam')
+def getVidObj():
+    global cam
+
+    try:
+        cam
+    except NameError:
+        cam = VideoCamera()
+        return Response({"data": "done"}, mimetype='multipart/x-mixed-replace; boundary=frame')
+    else:
+        if cam == 1:
+            cam = VideoCamera()
+            return Response({"data": "done"}, mimetype='multipart/x-mixed-replace; boundary=frame')
+        else:
+            return Response("Camera is already ON!", mimetype='multipart/x-mixed-replace; boundary=frame')
+
+
+@app.route('/stopcam')
+def delVidObj():
+    global cam
+    try:
+        cam
+    except NameError:
+        print('Camera is not started yet')
+    else:
+        del cam
+    return Response({"data": "done"}, mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 #

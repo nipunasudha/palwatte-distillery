@@ -16,12 +16,14 @@
             <div class="row">
                 <div class="col-md-7" id="photo-div">
                     {#<img id="photo" src="#" alt="-">#}
-                    <iframe id="photo-iframe" src="http://127.0.0.1:5000/fun"
+                    <iframe id="photo-iframe" src="http://127.0.0.1:5000/camera-stream"
                             style="width: 100%;height: 600px;border: none;"></iframe>
                 </div>
                 <div class="col-md-5">
                     <p id="count">Initializing live stream...</p>
                     <button onclick="location.reload()" class="btn-primary">Reload Stream</button>
+                    <button id="btn-startcam" onclick="startCamera()" class="btn-primary">Start Camera</button>
+                    <button id="btn-stopcam" onclick="stopCamera()" class="btn-danger">Stop Camera</button>
                     <hr>
                     <h4>System information</h4>
                     <p>
