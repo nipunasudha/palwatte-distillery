@@ -1,6 +1,6 @@
 {
 "version": 3,
-"mappings": "AAAA,MAAO;EACL,KAAK,EAAE,IAAI",
+"mappings": "AACE,iBAAO;EACL,KAAK,EAAE,IAAI;EACX,MAAM,EAAE,KAAK",
 "sources": ["monitor.scss"],
 "names": [],
 "file": "monitor.css"

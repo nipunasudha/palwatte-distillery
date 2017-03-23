@@ -14,11 +14,14 @@
                 <h2>Live Feed Monitor </h2>
             </div>
             <div class="row">
-                <div class="col-md-7"><img id="photo" src="#" alt="-"></div>
+                <div class="col-md-7" id="photo-div">
+                    {#<img id="photo" src="#" alt="-">#}
+                    <iframe id="photo-iframe" src="http://127.0.0.1:5000/fun"
+                            style="width: 100%;height: 600px;border: none;"></iframe>
+                </div>
                 <div class="col-md-5">
                     <p id="count">Initializing live stream...</p>
-                    <button onclick="autoFetch()" class="btn-primary">Auto</button>
-                    <button onclick="manualFetch()" class="btn-primary">Manual Fetch</button>
+                    <button onclick="location.reload()" class="btn-primary">Reload Stream</button>
                     <hr>
                     <h4>System information</h4>
                     <p>

@@ -1,7 +1,6 @@
-var interval
 $(function () {
-    manualFetch()
 })
+
 var dataObj = {'cmd': 'PRINT', 'data': ["any", "thing", "here"]}
 function fetchData() {
     console.log("======req sent======")
@@ -17,13 +16,8 @@ function fetchData() {
 
 }
 
-
-function autoFetch() {
-    fetchData()
-    interval = setInterval(fetchData, 600)
-}
-
-function manualFetch() {
-    clearInterval(interval);
-    fetchData();
+function reloadIframe() {
+    // hackishly force iframe to reload
+    var iframe = document.getElementById("photo-iframe");
+    iframe.src = iframe.src;
 }

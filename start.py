@@ -15,11 +15,10 @@ dispatcher.run_server(relPath)
 
 # fake image processor
 
-cam = imp.init_camera(0)
-while True:
-    start_time = time.time()
-    output_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "web-app", "web", "img", "photoFromCam.jpg")
+# while True:
+# start_time = time.time()
+# output_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "web-app", "web", "img", "photoFromCam.jpg")
+#
+# imp.read_camera(cam, output_path)
 
-    imp.read_camera(cam, output_path)
-
-    tools.time_regulator(0.6, start_time)
+# tools.time_regulator(0.6, start_time)

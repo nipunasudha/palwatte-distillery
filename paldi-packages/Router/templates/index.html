@@ -1,0 +1,14 @@
+<html>
+<head>
+    <title>Video Streaming Demonstration</title>
+    <style>
+        #photo {
+            width: 100%;
+            border: 1px black;
+        }
+    </style>
+</head>
+<body>
+<img id="photo" src="{{ url_for('video_feed') }}">
+</body>
+</html>
