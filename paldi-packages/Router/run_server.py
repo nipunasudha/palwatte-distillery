@@ -24,7 +24,7 @@ print("Initiated.")
 @app.route('/post', methods=['POST'])
 def resultp():
     global requestCount
-    st.parse_command(request)
+    st.parse_command(request, cam)
     requestCount += 1
     return json.dumps(
         {'data': [requestCount],
