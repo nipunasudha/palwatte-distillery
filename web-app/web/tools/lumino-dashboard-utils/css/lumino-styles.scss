@@ -1499,3 +1499,10 @@ fieldset[disabled] {
   background: none;
   border: none;
 }
+
+.list-group.wider {
+  .list-group-item {
+    width: 100%;
+    text-align: left;
+  }
+}

@@ -1093,4 +1093,8 @@ fieldset[disabled] .btn-danger {
   background: none;
   border: none; }
 
-/*# sourceMappingURL=lumino-styles.css.mapcss.map */
+.list-group.wider .list-group-item {
+  width: 100%;
+  text-align: left; }
+
+/*# sourceMappingURL=lumino-styles.css.map */

@@ -85,6 +85,13 @@
                     <use xlink:href="#stroked-notepad"/>
                 </svg>
                 Logs</a></li>
+        <li class=" {% if app.request.attributes.get('_route')=="rules" %}
+                            active
+                {% endif %}"><a href="{{ path('rules') }}">
+                <svg class="glyph stroked key ">
+                    <use xlink:href="#stroked-key"/>
+                </svg>
+                Rules</a></li>
         <li class=" {% if app.request.attributes.get('_route')=="settings" %}
                             active
                 {% endif %}"><a href="{{ path('settings') }}">
@@ -111,13 +118,18 @@
                         </svg>
                     </a>
                 </li>
-                <li class="active">Icons</li>
+                <li class="active">Control Panel</li>
             </ol>
         {% endblock %}
     </div><!--/.row-->
-    {% block body %}
-        ---
-    {% endblock %}
+
+    <div class="container">
+        <br>
+        {% block body %}
+
+        {% endblock %}
+    </div>
+
 
 </div>    <!--/.main-->
 {% block javascript %}

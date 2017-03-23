@@ -24,3 +24,13 @@ class VideoCamera(object):
             return jpeg.tobytes()
         else:
             return "error"
+
+    def get_frame_for_cv(self):
+        success, image = self.video.read()
+        # We are using Motion JPEG, but OpenCV defaults to capture raw images,
+        # so we must encode it into JPEG in order to correctly display the
+        # video stream.
+        if success:
+            return image
+        else:
+            return "error"
