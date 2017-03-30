@@ -9,10 +9,12 @@
     {% block stylesheets %}
         <link href="{{ asset('tools/lumino-dashboard-utils/css/bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{ asset('tools/lumino-dashboard-utils/css/lumino-styles.css') }}" rel="stylesheet">
-
+        <link href="{{ asset('css/app.base.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('bower/zebra_dialog/public/css/flat/zebra_dialog.css') }}"
+              type="text/css">
     {% endblock %}
-    {#<script src="{{ asset('tools/lumino-dashboard-utils/js/jquery-1.11.1.min.js') }}"></script>#}
-    <script src="{{ asset('bower/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('tools/lumino-dashboard-utils/js/jquery-1.11.1.min.js') }}"></script>
+    {#<script src="{{ asset('bower/jquery/dist/jquery.min.js') }}"></script>#}
     <script src="{{ asset('tools/lumino-dashboard-utils/js/lumino.glyphs.js') }}"></script>
     <link rel="shortcut icon" type="image/png" href="{{ asset('favicon.png') }}">
 </head>
@@ -123,18 +125,19 @@
         {% endblock %}
     </div><!--/.row-->
 
-    <div class="container">
-        <br>
-        {% block body %}
+    {#<div class="container">#}
+    {#<br>#}
+    {% block body %}
 
-        {% endblock %}
-    </div>
+    {% endblock %}
+    {#</div>#}
 
 
 </div>    <!--/.main-->
 {% block javascript %}
 
     <script src="{{ asset('tools/lumino-dashboard-utils/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('bower/zebra_dialog/public/javascript/zebra_dialog.js') }}"></script>
     <script src="{{ asset('js/app.utilities.js') }}"></script>
     <script>
 

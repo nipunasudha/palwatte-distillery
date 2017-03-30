@@ -1,4 +1,5 @@
 $(function () {
+
 })
 
 var dataObj = {'cmd': 'PRINT', 'data': ["any", "thing", "here"]}
