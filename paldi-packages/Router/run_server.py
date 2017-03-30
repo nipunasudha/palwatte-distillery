@@ -12,6 +12,7 @@ import pprint
 import json
 import server_tools as st
 
+testData = ["Nipuna", "Sudharaka", "Wijesinghe"]
 cam = 1
 cwd = os.getcwd()
 requestCount = 0
@@ -21,14 +22,29 @@ print("Initiated.")
 
 
 # RECIEVING POST REQUEST
+@app.route('/get-rules', methods=['GET'])
+def get_rules():
+    global testData
+    return json.dumps(
+        {
+            'data': testData
+        })
+
+
 @app.route('/post', methods=['POST'])
 def resultp():
-    global requestCount
-    st.parse_command(request, cam)
-    requestCount += 1
-    return json.dumps(
-        {'data': [requestCount],
-         'path': os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'fake.png')})
+    global requestCount, cam
+
+    if validateCamera():
+        st.parse_command(request, cam)
+        requestCount += 1
+        return json.dumps(
+            {'data': [requestCount],
+             'path': os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'fake.png')})
+    else:
+        print('Camera is not started yet')
+        return Response("No camera!",
+                        mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 @app.route('/camera-stream')
@@ -48,51 +64,48 @@ def gen(camera):
 @app.route('/video_feed')
 def video_feed():
     global cam
-    try:
-        cam
-    except NameError:
+    if validateCamera():
+        return Response(gen(cam),
+                        mimetype='multipart/x-mixed-replace; boundary=frame')
+    else:
         print('Camera is not started yet')
         return Response("No camera!",
                         mimetype='multipart/x-mixed-replace; boundary=frame')
-    else:
-        if cam == 1:
-            return Response("No camera!",
-                            mimetype='multipart/x-mixed-replace; boundary=frame')
-        else:
-            return Response(gen(cam),
-                            mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 @app.route('/startcam')
 def getVidObj():
     global cam
-
-    try:
-        cam
-    except NameError:
+    if validateCamera():
+        return Response("Camera is already ON!", mimetype='multipart/x-mixed-replace; boundary=frame')
+    else:
         cam = VideoCamera()
         return Response({"data": "done"}, mimetype='multipart/x-mixed-replace; boundary=frame')
-    else:
-        if cam == 1:
-            cam = VideoCamera()
-            return Response({"data": "done"}, mimetype='multipart/x-mixed-replace; boundary=frame')
-        else:
-            return Response("Camera is already ON!", mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 @app.route('/stopcam')
 def delVidObj():
     global cam
-    try:
-        cam
-    except NameError:
-        print('Camera is not started yet')
-    else:
+    if validateCamera():
         del cam
+    else:
+        print('Camera is not started yet')
     return Response({"data": "done"}, mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
-#
+def validateCamera():
+    global cam
+    try:
+        cam
+    except NameError:
+        return False
+    else:
+        if cam == 1:
+            return False
+        else:
+            return True
+
+
 # http_server = HTTPServer(WSGIContainer(app))
 # http_server.listen(5000)
 # IOLoop.instance().start()
