@@ -25,7 +25,7 @@ var app = new Vue({
             maxDangerValue: 4500,
             priority: "Low"
         }, {
-            variableID: "V001",
+            variableID: "V003",
             variableName: "Ethyl Concentration",
             minDangerValue: 0.732,
             minWarningValue: 0.655,
@@ -36,10 +36,11 @@ var app = new Vue({
     },
     methods: {
 
-        editRule: function () {
-            app.invokeEditQuestion("Ethyl Concentration")
+        editRule: function (varID) {
+
+            app.invokeEditQuestion("Ethyl Concentration", varID)
         },
-        invokeEditQuestion: function (ruleName) {
+        invokeEditQuestion: function (ruleName, varID) {
             $.Zebra_Dialog('Are you sure you want to edit the rule "' + ruleName + '"?',
                 {
                     'type': 'warning',
@@ -49,6 +50,7 @@ var app = new Vue({
                     'buttons': [
                         {
                             caption: 'Yes', callback: function () {
+
                         }
                         },
                         {
@@ -59,10 +61,11 @@ var app = new Vue({
                 }
             );
         },
-        deleteRule: function () {
-            app.invokeDeleteQuestion("Ethyl Concentration")
+        deleteRule: function (varID) {
+            app.invokeDeleteQuestion("Ethyl Concentration", varID)
+            // alert(varID)
         },
-        invokeDeleteQuestion: function (ruleName) {
+        invokeDeleteQuestion: function (ruleName, varID) {
             $.Zebra_Dialog('Are you sure you want to delete the rule "' + ruleName + '"?',
                 {
                     'type': 'warning',
@@ -72,6 +75,9 @@ var app = new Vue({
                     'buttons': [
                         {
                             caption: 'Yes', callback: function () {
+                            console.log(app.filterObject(app.rules, varID))
+                            // delete app.rules[app.filterObject(app.rules, varID)];
+                            app.rules.splice(app.filterObject(app.rules, varID), 1)
                         }
                         },
                         {
@@ -81,6 +87,15 @@ var app = new Vue({
                     ]
                 }
             );
+        },
+        filterObject: function (arr, searchKey) {
+            for (var i = 0; i < arr.length; i++) {
+
+                if (arr[i]["variableID"] === searchKey) {
+                    return i;
+                }
+
+            }
         }
     }
 })

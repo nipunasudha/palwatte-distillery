@@ -15,7 +15,7 @@
 
 {% block body %}
     <h3>Rules</h3>
-<button onclick="gettest()">Test get</button>
+    <button onclick="gettest()">Test get</button>
     <div id="app" v-cloak>
         <hr>
         <button class="btn btn-primary">Add New Rule</button>
@@ -39,8 +39,8 @@
                 <td class="td-num"> [[ rule.maxDangerValue ]]</td>
                 <td>
                     &nbsp;
-                    <div class="btn btn-info" v-on:click="editRule()">Edit</div>
-                    <div class="btn btn-danger" v-on:click="deleteRule()">Delete</div>
+                    <div class="btn btn-info" v-on:click="editRule(rule.variableID)">Edit</div>
+                    <div class="btn btn-danger" v-on:click="deleteRule(rule.variableID)">Delete</div>
                 </td>
             </tr>
 
