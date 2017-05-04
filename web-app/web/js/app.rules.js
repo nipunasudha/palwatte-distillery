@@ -1,7 +1,9 @@
 $(function () {
 
 })
-
+function gettest() {
+    alert("get test")
+}
 var app = new Vue({
     el: '#app',
     data: {
