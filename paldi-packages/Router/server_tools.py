@@ -21,4 +21,4 @@ def commander(cmd, data, cam):
         print("Ok, printed")
     elif cmd == "CROP":
         img = cam.get_frame_for_cv()
-        return AS.getSelectionsFromImage(img)
+        return [AS.getSelectionsFromImage(img),img]

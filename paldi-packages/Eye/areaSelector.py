@@ -115,11 +115,12 @@ def getSelectionsFromImage(img):
         # print(len(refPts) / 2)
         # print(refPts)
         for selection in range(0, int(len(refPts) / 2)):
+            break #TO STOP MINI WINDOWS
             roi = image[refPts[0 + (selection * 2)][1]:refPts[1 + (selection * 2)][1],
                   refPts[0 + (2 * selection)][0]:refPts[1 + (2 * selection)][0]]
             cv2.imshow("ROI" + str(selection), roi)
 
-        cv2.waitKey(0)
+        # cv2.waitKey(0)
     cv2.destroyAllWindows()
     return refPts
 

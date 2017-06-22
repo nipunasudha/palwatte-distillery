@@ -1,11 +1,14 @@
 from flask import Flask, request, jsonify, render_template, Response
 from flask_cors import CORS
+# OPENCV
+import numpy as np
+import cv2
 # Tornado serving utility
 from tornado.wsgi import WSGIContainer
 from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop
 # Import image processor
-import image_processor as im
+import image_processor as imp
 from Eye.init_camera import VideoCamera
 import os
 import pprint
@@ -53,7 +56,11 @@ def resultp():
     global requestCount, cam
 
     if validateCamera():
-        print(st.parse_command(request, cam))
+        command_result = st.parse_command(request, cam)
+        print(command_result[0])
+        # cv2.imshow("Original Image", command_result[1])
+        # cv2.waitKey(0)
+        imp.start_processing(command_result)
         requestCount += 1
         return json.dumps(
             {'data': [requestCount],
