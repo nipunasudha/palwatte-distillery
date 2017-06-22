@@ -33,7 +33,7 @@ def start_processing(img_cropped):
     img_cropped = img_cropped[246:328, 67:310].copy()
     preprocess(img_cropped)
     read_digits(img_cropped)
-    cv2.imshow("Cropped",img_cropped)
+    cv2.imshow("Cropped", img_cropped)
     cv2.waitKey()
 
 
@@ -72,6 +72,6 @@ def read_digits(img_cropped):
 print("Image Processor Started")
 tool = initTool()
 
-img = cv2.imread("four_panal.png", 1)
-
-start_processing(img)
+# uncomment to capture fake images
+# img = cv2.imread("four_panal.png", 1)
+# start_processing(img)
