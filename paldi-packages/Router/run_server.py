@@ -53,7 +53,7 @@ def resultp():
     global requestCount, cam
 
     if validateCamera():
-        st.parse_command(request, cam)
+        print(st.parse_command(request, cam))
         requestCount += 1
         return json.dumps(
             {'data': [requestCount],

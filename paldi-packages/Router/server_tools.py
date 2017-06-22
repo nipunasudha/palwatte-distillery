@@ -9,7 +9,8 @@ from tornado.ioloop import IOLoop
 def parse_command(request, cam):
     cmd = request.form['cmd']
     data = request.form.getlist('data[]')
-    commander(cmd, data, cam)
+    result = commander(cmd, data, cam)
+    return result
 
 
 def commander(cmd, data, cam):
@@ -20,4 +21,4 @@ def commander(cmd, data, cam):
         print("Ok, printed")
     elif cmd == "CROP":
         img = cam.get_frame_for_cv()
-        print(AS.getSelectionsFromImage(img))
+        return AS.getSelectionsFromImage(img)
