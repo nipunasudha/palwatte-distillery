@@ -58,6 +58,7 @@ def resultp():
     if validateCamera():
         command_result = st.parse_command(request, cam)
         print(command_result[0])
+        cv2.imwrite('four_panal.png', command_result[1])
         # cv2.imshow("Original Image", command_result[1])
         # cv2.waitKey(0)
         imp.start_processing(command_result)

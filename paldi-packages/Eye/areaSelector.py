@@ -100,18 +100,18 @@ def getSelectionsFromImage(img):
     while keepRunning:
         # cv2.imshow("Copyright (C) 2017 Syntac Inc. Palwatte Distillery Monitor", image)
         key = cv2.waitKey(1) & 0xFF
-        if (key == ord("d")):
+        if key == ord("d"):
             break
-        if (key == ord("r")):
-            if ((len(refPts) % 2) == 0):
+        if key == ord("r"):
+            if (len(refPts) % 2) == 0:
                 refPts = refPts[:len(refPts) - 2]
-                numSelected = numSelected - 1
+                numSelected -= 1
                 render_overlays()
-        if (key == 27):
+        if key == 27:
             keepRunning = 0
             cv2.destroyAllWindows()
             return []
-    if ((len(refPts) % 2) == 0 and len(refPts) != 0 and keepRunning == 1):
+    if (len(refPts) % 2) == 0 and len(refPts) != 0 and keepRunning == 1:
         # print(len(refPts) / 2)
         # print(refPts)
         for selection in range(0, int(len(refPts) / 2)):
