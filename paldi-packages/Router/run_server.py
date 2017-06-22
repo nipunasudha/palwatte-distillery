@@ -13,6 +13,23 @@ import json
 import server_tools as st
 
 testData = ["Nipuna", "Sudharaka", "Wijesinghe"]
+ruleData = [
+    {
+        "variableID": "wow",
+        "variableName": "wow",
+        "minDangerValue": "wow",
+        "minWarningValue": "wow",
+        "maxWarningValue": "wow",
+        "maxDangerValue": "wow"},
+    {
+        "variableID": "not so wow",
+        "variableName": "not so wow",
+        "minDangerValue": "not so wow",
+        "minWarningValue": "not so wow",
+        "maxWarningValue": "not so wow",
+        "maxDangerValue": "not so wow"}
+
+]
 cam = 1
 cwd = os.getcwd()
 requestCount = 0
@@ -27,7 +44,7 @@ def get_rules():
     global testData
     return json.dumps(
         {
-            'data': testData
+            'data': ruleData
         })
 
 

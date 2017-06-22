@@ -7,33 +7,28 @@ function gettest() {
 var app = new Vue({
     el: '#app',
     data: {
-        message: 'Hello Vue!',
-        rules: [{
-            variableID: "V001",
-            variableName: "Fermenter Temperature",
-            minDangerValue: 20,
-            minWarningValue: 30,
-            maxWarningValue: 60,
-            maxDangerValue: 80,
-            priority: "High"
-        }, {
-            variableID: "V002",
-            variableName: "Blending Speed",
-            minDangerValue: null,
-            minWarningValue: null,
-            maxWarningValue: 2000,
-            maxDangerValue: 4500,
-            priority: "Low"
-        }, {
-            variableID: "V003",
-            variableName: "Ethyl Concentration",
-            minDangerValue: 0.732,
-            minWarningValue: 0.655,
-            maxWarningValue: 0.932,
-            maxDangerValue: 1.347,
-            priority: "Low"
-        }]
+        rules: {}
     },
+    created: function () {
+        var self = this;
+        $.ajax({
+            url: 'http://localhost:5000/get-rules',
+            method: 'GET',
+            success: function (data) {
+                var data_str = JSON.stringify(eval('(' + data + ')'));
+                var data_obj = JSON.parse(data_str);
+                console.log(data_obj)
+                self.rules = data_obj.data;
+            },
+            error: function (error) {
+                alert(JSON.stringify(error));
+            }
+        });
+
+        console.log(self.rules)
+        console.log("Done")
+    },
+
     methods: {
 
         editRule: function (varID) {
