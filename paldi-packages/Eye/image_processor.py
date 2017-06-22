@@ -18,22 +18,26 @@ def initTool():
         print("No OCR tool found")
         sys.exit(1)
 
-    tool = tools[0]
-    print("Will use tool '%s'" % (tool.get_name()))
-    langs = tool.get_available_languages()
+    tool_ = tools[0]
+    print("Will use tool '%s'" % (tool_.get_name()))
+    langs = tool_.get_available_languages()
     print("Available languages: %s" % ", ".join(langs))
     lang = langs[2]
     print("Will use lang '%s'" % (lang))
-    return tool
+    return tool_
 
 
 def start_processing(img_cropped):
-    global tool
-
     if isinstance(img_cropped, list): img_cropped = img_cropped[1]
     # ============================= TWO (pure red char on black)================================
     img_cropped = img_cropped[246:328, 67:310].copy()
+    preprocess(img_cropped)
+    read_digits(img_cropped)
+    cv2.imshow("Cropped",img_cropped)
+    cv2.waitKey()
 
+
+def preprocess(img_cropped):
     img_cropped = cv2.medianBlur(img_cropped, 5)
     # img_cropped = cv2.cvtColor(img_cropped, cv2.COLOR_BGR2GRAY)
     img_cropped = cv2.cvtColor(img_cropped, cv2.COLOR_BGR2HSV)
@@ -53,15 +57,16 @@ def start_processing(img_cropped):
     img_cropped = cv2.dilate(img_cropped, kernel, iterations=3)
     # ------------------------
 
+
+def read_digits(img_cropped):
+    global tool
     digits = tool.image_to_string(
         Image.fromarray(img_cropped),
         lang="seg",
         builder=pyocr.tesseract.DigitBuilder()
     )
     print(digits)
-
-    cv2.imshow("preprocessed", img_cropped)
-    cv2.waitKey(0)
+    return digits
 
 
 print("Image Processor Started")
