@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template, Response
+from flask import Flask, request, jsonify, render_template, Response, redirect
 from flask_cors import CORS
 # Import image processor
 import image_processor as imp
@@ -7,6 +7,7 @@ from Utilities import rule_manager as rm
 import os
 import json
 import server_tools as st
+import pprint
 
 cam = 1
 cwd = os.getcwd()
@@ -41,6 +42,12 @@ def resultp():
         print('Camera is not started yet')
         return Response("No camera!",
                         mimetype='multipart/x-mixed-replace; boundary=frame')
+
+
+@app.route('/post-generic', methods=['POST'])
+def generic_post():
+    rm.add_rule(request)
+    return redirect("http://localhost:8000/rules", code=302)
 
 
 @app.route('/camera-stream')

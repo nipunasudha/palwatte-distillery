@@ -1,9 +1,21 @@
 $(function () {
 
 })
-function gettest() {
-    alert("get test")
+
+function add_rule() {
+
+    $('.add-rule').hide()
+    $('.add-rule-div').slideDown()
 }
+
+
+//VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE
+//VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE
+//VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE
+//VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE
+//VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE VUE
+
+
 var app = new Vue({
     el: '#app',
     data: {
