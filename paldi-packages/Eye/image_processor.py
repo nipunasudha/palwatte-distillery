@@ -31,7 +31,7 @@ def start_processing(img_cropped):
     if isinstance(img_cropped, list): img_cropped = img_cropped[1]
     # ============================= TWO (pure red char on black)================================
     img_cropped = img_cropped[246:328, 67:310].copy()
-    preprocess(img_cropped)
+    img_cropped=preprocess(img_cropped)
     read_digits(img_cropped)
     cv2.imshow("Cropped", img_cropped)
     cv2.waitKey()
@@ -56,6 +56,7 @@ def preprocess(img_cropped):
     img_cropped = cv2.erode(img_cropped, kernel, iterations=4)
     img_cropped = cv2.dilate(img_cropped, kernel, iterations=3)
     # ------------------------
+    return img_cropped
 
 
 def read_digits(img_cropped):
