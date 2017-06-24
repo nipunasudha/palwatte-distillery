@@ -1,5 +1,4 @@
 import sys
-import cv2
 
 sys.path.insert(0, '/media/nipuna/APPS & GAMES/learn-opencv')
 import areaSelector as AS

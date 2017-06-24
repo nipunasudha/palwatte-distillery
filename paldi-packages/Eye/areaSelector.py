@@ -44,14 +44,14 @@ def correct_coordinates():
                 refPts[(index * 2) + 1] = (x2, y2)
 
 
-def render_instructions(image):
+def render_instructions(image_):
     global font, onDrag
-    if (onDrag):
-        cv2.rectangle(image, (10, 10), (100, 30), (0, 0, 0), cv2.FILLED, lineType=8)
-        cv2.putText(image, 'SELECTING', (15, 25), font, 0.5, (255, 255, 255), 1, cv2.LINE_AA)
+    if onDrag:
+        cv2.rectangle(image_, (10, 10), (100, 30), (0, 0, 0), cv2.FILLED, lineType=8)
+        cv2.putText(image_, 'SELECTING', (15, 25), font, 0.5, (255, 255, 255), 1, cv2.LINE_AA)
 
-    cv2.rectangle(image, (0, image.shape[0] - 20), (image.shape[1], image.shape[0]), (0, 0, 0), cv2.FILLED, lineType=8)
-    cv2.putText(image, 'PRESS R TO UNDO, D TO SAVE, ESC TO CANCEL', (0, image.shape[0] - 7), font, 0.5, (255, 255, 255),
+    cv2.rectangle(image_, (0, image_.shape[0] - 20), (image_.shape[1], image_.shape[0]), (0, 0, 0), cv2.FILLED, lineType=8)
+    cv2.putText(image_, 'PRESS R TO UNDO, D TO SAVE, ESC TO CANCEL', (0, image_.shape[0] - 7), font, 0.5, (255, 255, 255),
                 1, cv2.LINE_AA)
 
 
@@ -66,7 +66,7 @@ def render_overlays():
                       tuple(map(operator.add, refPts[(index * 2) + 1], (1, 1))), (0, 0, 0), 1, lineType=8)
         cv2.putText(local_clone, 'A ' + str(index + 1), tuple(map(operator.add, refPts[(index * 2)], (0, -3))), font,
                     0.5, (255, 0, 0), 1, cv2.LINE_AA)
-    cv2.imshow("Copyright (C) 2017 Syntac Inc. Palwatte Distillery Monitor", local_clone)
+    cv2.imshow("Palwatte Distillery Monitor - Copyright (C) 2017 Syntac Inc.", local_clone)
 
 
 def click_handler(event, x, y, flags, pram):
@@ -94,11 +94,10 @@ def getSelectionsFromImage(img):
     refPts = []  # Reinit refPts
     clone = image.copy()
     render_instructions(clone)
-    cv2.namedWindow("Copyright (C) 2017 Syntac Inc. Palwatte Distillery Monitor", flags=cv2.WINDOW_AUTOSIZE)
-    cv2.setMouseCallback("Copyright (C) 2017 Syntac Inc. Palwatte Distillery Monitor", click_handler)
-    cv2.imshow("Copyright (C) 2017 Syntac Inc. Palwatte Distillery Monitor", clone)
+    cv2.namedWindow("Palwatte Distillery Monitor - Copyright (C) 2017 Syntac Inc.", flags=cv2.WINDOW_AUTOSIZE)
+    cv2.setMouseCallback("Palwatte Distillery Monitor - Copyright (C) 2017 Syntac Inc.", click_handler)
+    cv2.imshow("Palwatte Distillery Monitor - Copyright (C) 2017 Syntac Inc.", clone)
     while keepRunning:
-        # cv2.imshow("Copyright (C) 2017 Syntac Inc. Palwatte Distillery Monitor", image)
         key = cv2.waitKey(1) & 0xFF
         if key == ord("d"):
             break
@@ -108,22 +107,15 @@ def getSelectionsFromImage(img):
                 numSelected -= 1
                 render_overlays()
         if key == 27:
-            keepRunning = 0
             cv2.destroyAllWindows()
             return []
     if (len(refPts) % 2) == 0 and len(refPts) != 0 and keepRunning == 1:
         # print(len(refPts) / 2)
         # print(refPts)
         for selection in range(0, int(len(refPts) / 2)):
-            break #TO STOP MINI WINDOWS
-            roi = image[refPts[0 + (selection * 2)][1]:refPts[1 + (selection * 2)][1],
-                  refPts[0 + (2 * selection)][0]:refPts[1 + (2 * selection)][0]]
-            cv2.imshow("ROI" + str(selection), roi)
-
-        # cv2.waitKey(0)
+            break  # TO STOP MINI WINDOWS
+            # roi = image[refPts[0 + (selection * 2)][1]:refPts[1 + (selection * 2)][1],
+            #       refPts[0 + (2 * selection)][0]:refPts[1 + (2 * selection)][0]]
+            # cv2.imshow("ROI" + str(selection), roi)
     cv2.destroyAllWindows()
     return refPts
-
-# img = cv2.imread('samples/37.PNG')
-# co = getSelectionsFromImage(img)
-# print(co)

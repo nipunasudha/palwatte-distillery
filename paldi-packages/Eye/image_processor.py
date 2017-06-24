@@ -1,7 +1,5 @@
-import os
 import sys
 import numpy as np
-import PIL
 from PIL import Image
 import pyocr
 import cv2
@@ -72,7 +70,3 @@ def read_digits(img_cropped):
 
 print("Image Processor Started")
 tool = initTool()
-
-# uncomment to capture fake images
-# img = cv2.imread("four_panal.png", 1)
-# start_processing(img)
