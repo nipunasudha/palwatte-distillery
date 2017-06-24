@@ -3,6 +3,7 @@ import sys
 sys.path.insert(0, '/media/nipuna/APPS & GAMES/learn-opencv')
 import areaSelector as AS
 from tornado.ioloop import IOLoop
+from Utilities import rule_manager as rm
 
 
 def parse_command(request, cam):
@@ -20,4 +21,6 @@ def commander(cmd, data, cam):
         print("Ok, printed")
     elif cmd == "CROP":
         img = cam.get_frame_for_cv()
-        return [AS.getSelectionsFromImage(img),img]
+        return [AS.getSelectionsFromImage(img), img]
+    elif cmd == "RULEADD":
+        rm.add_rule(data)

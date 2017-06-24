@@ -3,28 +3,11 @@ from flask_cors import CORS
 # Import image processor
 import image_processor as imp
 from Eye.init_camera import VideoCamera
+from Utilities import rule_manager as rm
 import os
 import json
 import server_tools as st
 
-testData = ["Nipuna", "Sudharaka", "Wijesinghe"]
-ruleData = [
-    {
-        "variableID": "wow",
-        "variableName": "wow",
-        "minDangerValue": "wow",
-        "minWarningValue": "wow",
-        "maxWarningValue": "wow",
-        "maxDangerValue": "wow"},
-    {
-        "variableID": "not so wow",
-        "variableName": "not so wow",
-        "minDangerValue": "not so wow",
-        "minWarningValue": "not so wow",
-        "maxWarningValue": "not so wow",
-        "maxDangerValue": "not so wow"}
-
-]
 cam = 1
 cwd = os.getcwd()
 requestCount = 0
@@ -36,10 +19,9 @@ print("Initiated.")
 # RECIEVING POST REQUEST
 @app.route('/get-rules', methods=['GET'])
 def get_rules():
-    global testData
     return json.dumps(
         {
-            'data': ruleData
+            'data': rm.ruleData
         })
 
 
