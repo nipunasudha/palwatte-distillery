@@ -25,14 +25,23 @@ def initTool():
     return tool_
 
 
-def start_processing(img_cropped):
-    if isinstance(img_cropped, list): img_cropped = img_cropped[1]
-    # ============================= TWO (pure red char on black)================================
-    img_cropped = img_cropped[246:328, 67:310].copy()
-    img_cropped=preprocess(img_cropped)
-    read_digits(img_cropped)
-    cv2.imshow("Cropped", img_cropped)
-    cv2.waitKey()
+def start_processing(img_data):
+    detected_text = []
+    if isinstance(img_data, list):
+        img_whole = img_data[1]
+        coord = img_data[0]
+    else:
+        return None
+
+    for i in range(0, len(coord), 2):
+        # (67, 246), (310, 328)
+        img_cropped = img_whole[coord[i][1]:coord[i + 1][1], coord[i][0]:coord[i + 1][0]].copy()
+        img_cropped = preprocess(img_cropped)
+        number = read_digits(img_cropped)
+        detected_text.append(number)
+        # cv2.imshow("Cropped", img_cropped)
+        # cv2.waitKey()
+    return detected_text
 
 
 def preprocess(img_cropped):

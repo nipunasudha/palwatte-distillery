@@ -8,7 +8,7 @@ import os
 import json
 import server_tools as st
 import pprint
-
+import areaSelector as AS
 cam = 1
 cwd = os.getcwd()
 requestCount = 0
@@ -33,7 +33,9 @@ def resultp():
     if validateCamera():
         command_result = st.parse_command(request, cam)
         print(command_result[0])
-        imp.start_processing(command_result)
+        detected_text = imp.start_processing(command_result)
+        if isinstance(detected_text, list):
+            pprint.pprint(detected_text)
         requestCount += 1
         return json.dumps(
             {'data': [requestCount],
@@ -111,3 +113,4 @@ def validateCamera():
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5000, debug=True, threaded=True)
+
