@@ -33,7 +33,9 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="#"><span>Palwatte</span>Distillery</a>
+
             <ul class="user-menu">
+
                 <li class="dropdown pull-right">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <svg class="glyph stroked male-user">
@@ -41,6 +43,9 @@
                         </svg>
                         User <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
+                        <li>&nbsp;&nbsp;
+                            <button onclick="request_ocr()" class="add-rule btn btn-primary">SnapOCR</button>
+                        </li>
                         <li><a href="#">
                                 <svg class="glyph stroked male-user">
                                     <use xlink:href="#stroked-male-user"></use>
@@ -57,6 +62,7 @@
                                 </svg>
                                 Logout</a></li>
                     </ul>
+
                 </li>
             </ul>
         </div>
@@ -141,6 +147,7 @@
     <script src="{{ asset('tools/lumino-dashboard-utils/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('bower/zebra_dialog/public/javascript/zebra_dialog.js') }}"></script>
     <script src="{{ asset('js/app.utilities.js') }}"></script>
+    <script src="{{ asset('js/app.general.js') }}"></script>
     <script>
 
         !function ($) {

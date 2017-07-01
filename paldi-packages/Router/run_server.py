@@ -9,7 +9,9 @@ import json
 import server_tools as st
 import pprint
 import areaSelector as AS
+
 cam = 1
+crop_coords = [(71, 144), (306, 228), (333, 143), (565, 226), (67, 246), (310, 328), (331, 243), (567, 330)]
 cwd = os.getcwd()
 requestCount = 0
 app = Flask(__name__)
@@ -25,13 +27,26 @@ def get_rules():
             'data': rm.ruleData
         })
 
+
 # RECIEVING GET REQUEST
 @app.route('/get-ocr', methods=['GET'])
 def get_ocr():
-    return json.dumps(
-        {
-            'data': ["Shit just got real!"]
-        })
+    global cam, crop_coords
+
+    if validateCamera():
+        command_result = st.commander("OCR", None, cam)
+        command_result[0] = crop_coords
+        print(command_result[0])
+        detected_text = imp.start_processing(command_result)
+        if isinstance(detected_text, list):
+            pprint.pprint(detected_text)
+        return json.dumps(
+            {'detected_text': detected_text})
+    else:
+        return json.dumps(
+            {
+                'myerror': ["Camera is not availabe (ocr)"]
+            })
 
 
 @app.route('/post', methods=['POST'])
