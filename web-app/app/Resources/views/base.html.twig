@@ -34,15 +34,20 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="#"><span>Palwatte</span>Distillery</a>
-
+            <div hidden style="
+                        width: 20px;
+                        height: 20px;
+                        background: white;
+                        "></div>
             <ul class="user-menu">
+
 
                 <li class="dropdown pull-right">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <svg class="glyph stroked male-user">
                             <use xlink:href="#stroked-male-user"></use>
                         </svg>
-                        User <span class="caret"></span></a>
+                        Administrator <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li>&nbsp;&nbsp;
                             <button onclick="request_ocr()" class="add-rule btn btn-primary">SnapOCR</button>
@@ -66,6 +71,18 @@
 
                 </li>
             </ul>
+            <ul class="user-menu">
+
+                <li class="dropdown pull-right">
+                    <a href="#" class="dropdown-toggle">
+                        <svg class="glyph stroked camera ">
+                            <use xlink:href="#stroked-camera"/>
+                        </svg>
+                        Camera <span style="display: none; font-weight: bold" id="camstat">ON</span> &nbsp;&nbsp;&nbsp;</a>
+
+                </li>
+            </ul>
+
         </div>
 
     </div><!-- /.container-fluid -->

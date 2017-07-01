@@ -8,6 +8,8 @@ import os
 import json
 import server_tools as st
 import pprint
+import cv2
+import platform
 import areaSelector as AS
 
 cam = 1
@@ -102,6 +104,28 @@ def set_coordinates(command_result):
         return False
 
 
+# RECIEVING GET REQUEST
+@app.route('/get-info', methods=['GET'])
+def collect_system_info():
+    global cam
+    info = {}
+
+    info['cam_stat'] = validateCamera()
+    info['cam_width'] = "N/A"
+    info['cam_height'] = "N/A"
+    if validateCamera():
+        width = cam.video.get(3)  # float
+        height = cam.video.get(4)  # float
+        info['cam_width'] = width
+        info['cam_height'] = height
+
+    info['plat_os'] = platform.platform()
+    info['plat_bit'] = platform.machine()
+    info['plat_proc'] = platform.processor()
+    pprint.pprint(info)
+    return json.dumps(info)
+
+
 @app.route('/post-generic', methods=['POST'])
 def generic_post():
     rm.add_rule(request)
@@ -137,6 +161,7 @@ def video_feed():
 @app.route('/startcam')
 def getVidObj():
     global cam
+    collect_system_info()
     if validateCamera():
         return json.dumps(
             {
@@ -155,6 +180,7 @@ def getVidObj():
 @app.route('/stopcam')
 def delVidObj():
     global cam
+    collect_system_info()
     if validateCamera():
         del cam
         return json.dumps(
