@@ -17,12 +17,20 @@ CORS(app)
 print("Initiated.")
 
 
-# RECIEVING POST REQUEST
+# RECIEVING GET REQUEST
 @app.route('/get-rules', methods=['GET'])
 def get_rules():
     return json.dumps(
         {
             'data': rm.ruleData
+        })
+
+# RECIEVING GET REQUEST
+@app.route('/get-ocr', methods=['GET'])
+def get_ocr():
+    return json.dumps(
+        {
+            'data': ["Shit just got real!"]
         })
 
 
@@ -44,15 +52,18 @@ def resultp():
         print('Camera is not started yet')
         return Response("No camera!",
                         mimetype='multipart/x-mixed-replace; boundary=frame')
+
+
 def ocr_camera():
     global cam
     if validateCamera():
         img = cam.get_frame_for_cv()
-        command_result= [AS.getSelectionsFromImage(img), img]
+        command_result = [AS.getSelectionsFromImage(img), img]
         print(command_result[0])
         detected_text = imp.start_processing(command_result)
         if isinstance(detected_text, list):
             pprint.pprint(detected_text)
+
 
 @app.route('/post-generic', methods=['POST'])
 def generic_post():
@@ -121,4 +132,3 @@ def validateCamera():
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5000, debug=True, threaded=True)
-
