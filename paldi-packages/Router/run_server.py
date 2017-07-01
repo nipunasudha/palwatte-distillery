@@ -88,7 +88,7 @@ def resultp():
         return json.dumps(
             {
                 'mystatcode': "CAM-D",
-                'mystat': "Can't access camera."
+                'mystat': "Camera is not ON!"
             })
 
 

@@ -1,6 +1,9 @@
 var URLS = {"get": "http://localhost:5000/get", "post": "http://localhost:5000/post"};
 $(function () {
     update_info()
+    setInterval(function () {
+        update_info()
+    }, 8000)
 })
 function paldi_post(data, callback) {
 
