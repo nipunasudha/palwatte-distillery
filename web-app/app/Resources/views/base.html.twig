@@ -12,6 +12,7 @@
         <link href="{{ asset('css/app.base.css') }}" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('bower/zebra_dialog/public/css/flat/zebra_dialog.css') }}"
               type="text/css">
+        <link rel="stylesheet" href="{{ asset('bower/toastr/toastr.min.css') }}" type="text/css">
     {% endblock %}
     <script src="{{ asset('tools/lumino-dashboard-utils/js/jquery-1.11.1.min.js') }}"></script>
     {#<script src="{{ asset('bower/jquery/dist/jquery.min.js') }}"></script>#}
@@ -146,6 +147,31 @@
 
     <script src="{{ asset('tools/lumino-dashboard-utils/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('bower/zebra_dialog/public/javascript/zebra_dialog.js') }}"></script>
+    <script src="{{ asset('bower/toastr/toastr.min.js') }}"></script>
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "3000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+    </script>
+    <style>
+        #toast-container > div {
+            opacity: 0.9;
+        }
+    </style>
     <script src="{{ asset('js/app.utilities.js') }}"></script>
     <script src="{{ asset('js/app.general.js') }}"></script>
     <script>

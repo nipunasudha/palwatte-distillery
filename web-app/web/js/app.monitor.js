@@ -18,14 +18,18 @@ function fetchData() {
 }
 
 function startCamera() {
-    k = $.get('http://localhost:5000/startcam')
+    paldi_get(null, "http://localhost:5000/startcam", function () {
+        location.reload()
+
+    })
     $('#btn-startcam').prop("disabled", true);
     $('#btn-stopcam').prop("disabled", true);
-    location.reload()
 }
 function stopCamera() {
-    k = $.get('http://localhost:5000/stopcam')
+    paldi_get(null, "http://localhost:5000/stopcam", function () {
+        location.reload()
+
+    })
     $('#btn-stopcam').prop("disabled", true);
     $('#btn-startcam').prop("disabled", true);
-    location.reload()
 }

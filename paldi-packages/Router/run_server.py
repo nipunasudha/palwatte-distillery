@@ -41,11 +41,17 @@ def get_ocr():
         if isinstance(detected_text, list):
             pprint.pprint(detected_text)
         return json.dumps(
-            {'detected_text': detected_text})
+            {
+                'detected_text': detected_text,
+                'mystatcode': "OCR-S",
+                'mystat': "OCR Success."
+
+            })
     else:
         return json.dumps(
             {
-                'myerror': ["Camera is not availabe (ocr)"]
+                'mystatcode': "OCR-D",
+                'mystat': "Camera is not availabe for OCR."
             })
 
 
@@ -54,30 +60,46 @@ def resultp():
     global requestCount, cam
 
     if validateCamera():
-        command_result = st.parse_command(request, cam)
-        print(command_result[0])
-        detected_text = imp.start_processing(command_result)
-        if isinstance(detected_text, list):
-            pprint.pprint(detected_text)
-        requestCount += 1
-        return json.dumps(
-            {'data': [requestCount],
-             'path': os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'fake.png')})
+        # ----------------------------------------------
+        rqcmd = request.form['cmd']
+        rqdata = request.form.getlist('data[]')
+        command_result = st.commander(rqcmd, rqdata, cam)
+        # ----------------------------------------------
+        if rqcmd == "CROP":
+            if set_coordinates(command_result):
+
+                return json.dumps(
+                    {
+                        'mystatcode': "CROP-S",
+                        'mystat': "Region Selection Success.",
+                        'coords': command_result[0]
+                    })
+            else:
+                return json.dumps(
+                    {
+                        'mystatcode': "CROP-W",
+                        'mystat': "Error! Can't set coordinates."
+                    })
+
     else:
-        print('Camera is not started yet')
-        return Response("No camera!",
-                        mimetype='multipart/x-mixed-replace; boundary=frame')
+        print('Camera not valid')
+        return json.dumps(
+            {
+                'mystatcode': "CAM-D",
+                'mystat': "Can't access camera."
+            })
 
 
-def ocr_camera():
-    global cam
-    if validateCamera():
-        img = cam.get_frame_for_cv()
-        command_result = [AS.getSelectionsFromImage(img), img]
-        print(command_result[0])
-        detected_text = imp.start_processing(command_result)
-        if isinstance(detected_text, list):
-            pprint.pprint(detected_text)
+def set_coordinates(command_result):
+    global crop_coords
+    coords = command_result[0]
+
+    if isinstance(coords, list):
+        crop_coords = coords
+        pprint.pprint(coords)
+        return True
+    else:
+        return False
 
 
 @app.route('/post-generic', methods=['POST'])
@@ -116,10 +138,18 @@ def video_feed():
 def getVidObj():
     global cam
     if validateCamera():
-        return Response("Camera is already ON!", mimetype='multipart/x-mixed-replace; boundary=frame')
+        return json.dumps(
+            {
+                'mystatcode': "CAM-I",
+                'mystat': "Camera already ON."
+            })
     else:
         cam = VideoCamera()
-        return Response({"data": "done"}, mimetype='multipart/x-mixed-replace; boundary=frame')
+        return json.dumps(
+            {
+                'mystatcode': "CAM-S",
+                'mystat': "Camera started!"
+            })
 
 
 @app.route('/stopcam')
@@ -127,9 +157,18 @@ def delVidObj():
     global cam
     if validateCamera():
         del cam
+        return json.dumps(
+            {
+                'mystatcode': "CAM-S",
+                'mystat': "Camera stopped!"
+            })
     else:
         print('Camera is not started yet')
-    return Response({"data": "done"}, mimetype='multipart/x-mixed-replace; boundary=frame')
+        return json.dumps(
+            {
+                'mystatcode': "CAM-I",
+                'mystat': "Camera already OFF"
+            })
 
 
 def validateCamera():
